@@ -5,24 +5,29 @@ using UnityEngine;
 public class GoodGuy : MonoBehaviour
 {
     public GameObject goodGuy;
-    public bool goodGuyIsSaved;
+    public bool isGoodGuySaved;
 
     private GameManager gameManager;
-
 
     private void Start()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
 
-        goodGuyIsSaved = false;
+        isGoodGuySaved = false;
     }
 
     private void Update()
     {
-        if (goodGuyIsSaved)
+        if (isGoodGuySaved)
         { 
             Destroy(goodGuy);
-            gameManager.AddScore(1);
+            gameManager.UpdateScore(1);
+        }
+
+        if (transform.position.z < -6)
+        {
+            Destroy(goodGuy);
+            gameManager.UpdateLives(-1);
         }
     }
 
@@ -30,7 +35,7 @@ public class GoodGuy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            goodGuyIsSaved = true;
+            isGoodGuySaved = true;
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 10.0f;
+    public float speed = 100.0f;
     public float forwardInput;
     public float sidewardInput;
     public int lives;
@@ -15,13 +15,12 @@ public class PlayerController : MonoBehaviour
 
     private GameManager gameManager;
 
-    public bool gameOver = false;
-
-
     void Start()
     {
-        gameManager = GameObject.FindObjectOfType<GameManager>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
         playerRb = GetComponent<Rigidbody>();
+
         focalPoint = GameObject.Find("Focal Point");
     }
 
@@ -40,9 +39,8 @@ public class PlayerController : MonoBehaviour
             playerRb.velocity = Vector3.zero;
         }
 
-        if (gameManager.lives < 1)
+        if (gameManager.lives == 0)
         {
-            gameOver = true;
             Destroy(gameObject);
         }
     }
@@ -51,7 +49,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            gameManager.AddLives(-1);
+            gameManager.UpdateLives(-1);
         }
     }
 }

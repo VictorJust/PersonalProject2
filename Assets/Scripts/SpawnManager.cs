@@ -8,18 +8,17 @@ public class SpawnManager : MonoBehaviour
     private GameObject objectPrefab;
     
     private static float xRange = 6;
-    private static float zRange = 3;
     private static float xPos;
     private static float zPos;
     private Vector3 spawnPos;
 
-    private PlayerController playerControllerScript;
+    private GameManager gameManager;
     private float startDelay = 3;
     private float repeatRate = 3;
 
     void Start()
     {
-        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         InvokeRepeating("SpawnObject", startDelay, repeatRate);
     }
 
@@ -27,7 +26,7 @@ public class SpawnManager : MonoBehaviour
     {
         // Initialize a random spawn object and spawn position
         xPos = Random.Range(-xRange, xRange);
-        zPos = Random.Range(-zRange, zRange);
+        zPos = Random.Range(6, 11);
 
         objectPrefab = objectPrefabs[Random.Range(0, 4)];
         spawnPos = new Vector3(xPos, 0, zPos);
@@ -36,7 +35,7 @@ public class SpawnManager : MonoBehaviour
     void SpawnObject()
     {
         // If the game is not over, spawn objects
-        if (playerControllerScript.gameOver == false)
+        if (gameManager.isGameActive == true)
         {
             Instantiate(objectPrefab, spawnPos, objectPrefab.transform.rotation);
         }

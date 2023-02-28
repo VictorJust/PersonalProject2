@@ -5,20 +5,22 @@ using UnityEngine;
 public class RepeatGround : MonoBehaviour
 {
     private Vector3 startPos;
+    private Vector3 restartPos;
     private float repeatLength;
 
     void Start()
     {
-        startPos = transform.position;
-        repeatLength = GetComponent<BoxCollider>().size.z;
+        startPos = GameObject.Find("Ground 1").transform.position;
+        restartPos = GameObject.Find("Ground 2").transform.position;
+        repeatLength = GetComponent<BoxCollider>().size.z * 2;
     }
 
     void Update()
     {
-        // Make ground move (isn't smooth enough yet)
+        // Make ground move 
         if (transform.position.z < startPos.z - repeatLength)
         {
-            transform.position = startPos;
+            transform.position = restartPos;
         }
     }
 }

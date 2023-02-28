@@ -5,9 +5,19 @@ using UnityEngine;
 public class MoveDown : MonoBehaviour
 {
     public float speed = 1f;
-    void Update()
+    private GameManager gameManager;
+
+    private void Start()
+    {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+    }
+
+    private void Update()
     {
         // Make objects move "down" the screen
-        transform.Translate(-Vector3.forward * speed * Time.deltaTime);            
+        if (gameManager.isGameActive == true)
+        {
+            transform.Translate(-Vector3.forward * speed * Time.deltaTime);
+        }
     }
 }
