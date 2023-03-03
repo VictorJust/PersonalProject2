@@ -56,14 +56,16 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Menu\LoadGameRankScript.cs" />
     <Compile Include="Assets\Scripts\DestroyOutOfBounds.cs" />
     <Compile Include="Assets\Scripts\SpawnManager.cs" />
     <Compile Include="Assets\Scripts\GoodGuy.cs" />
     <Compile Include="Assets\Scripts\RepeatGround.cs" />
+    <Compile Include="Assets\Scripts\PlayerDataHandle.cs" />
+    <Compile Include="Assets\Scripts\Menu\MenuUIHandler.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\MoveDown.cs" />
-    <Compile Include="Assets\Scripts\Menu\MenuUIHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

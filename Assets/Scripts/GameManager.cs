@@ -25,14 +25,31 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     public bool isGameActive;
 
+    //Fields for display the player info
+    public Text CurrentPlayerName;
+    public Text BestPlayerNameAndScore;
+
+    //Static variables for holding the best player data
+    private static int BestScore;
+    private static string BestPlayer;
+
     public void Awake()
     {
         spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
 
         this.fixedDeltaTime = Time.fixedDeltaTime;
 
-        livesText.SetText("Lives: " + lives);
-        scoreText.SetText("Score: " + score);
+        UpdateLives(0);
+        UpdateScore(0);
+
+        LoadGameRankScript.LoadGameRank();
+    }
+
+    private void Start()
+    {
+        CurrentPlayerName.text = PlayerDataHandle.Instance.PlayerName;
+
+        SetBestPlayer();
     }
 
     void Update()
@@ -62,19 +79,22 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
         }
-        livesText.SetText("Lives: " + lives);
+        livesText.SetText($"Lives: {lives}");
     }
 
     public void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
-        scoreText.SetText("Score: " + score);
+        scoreText.SetText($"Score: {score}");
+
+        PlayerDataHandle.Instance.Score = score;
     }
 
     public void GameOver()
     {
-        gameOverText.gameObject.SetActive(true);
         isGameActive = false;
+        CheckBestPlayer();
+        gameOverText.gameObject.SetActive(true);
     }
 
     public void RestartGame()
@@ -116,5 +136,32 @@ public class GameManager : MonoBehaviour
     public void ReturnToMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    private void CheckBestPlayer()
+    {
+        int CurrentScore = PlayerDataHandle.Instance.Score;
+
+        if (CurrentScore > BestScore)
+        {
+            BestPlayer = PlayerDataHandle.Instance.PlayerName;
+            BestScore = CurrentScore;
+
+            LoadGameRankScript.SaveGameRank(BestPlayer, BestScore);
+        }
+
+        BestPlayerNameAndScore.text = $"Best Score - {BestPlayer}: {BestScore}";
+    }
+
+    private void SetBestPlayer()
+    {
+        if (BestPlayer == null && BestScore == 0)
+        {
+            BestPlayerNameAndScore.text = "";
+        }
+        else
+        {
+            BestPlayerNameAndScore.text = $"Best Score - {BestPlayer}: {BestScore}";
+        }
     }
 }

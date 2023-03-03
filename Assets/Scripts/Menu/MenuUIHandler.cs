@@ -18,7 +18,7 @@ public class MenuUIHandler : MonoBehaviour
 
     public void SetPlayerName()
     {
-        // PlayerDataHandle.Instance.PlayerName = PlayerNameInput.text;
+        PlayerDataHandle.Instance.PlayerName = PlayerNameInput.text;
     }
 
     public void ExitGame()

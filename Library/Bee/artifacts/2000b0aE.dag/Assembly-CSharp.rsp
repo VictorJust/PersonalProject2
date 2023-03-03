@@ -331,9 +331,11 @@
 "Assets/Scripts/DestroyOutOfBounds.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/GoodGuy.cs"
+"Assets/Scripts/Menu/LoadGameRankScript.cs"
 "Assets/Scripts/Menu/MenuUIHandler.cs"
 "Assets/Scripts/MoveDown.cs"
 "Assets/Scripts/PlayerController.cs"
+"Assets/Scripts/PlayerDataHandle.cs"
 "Assets/Scripts/RepeatGround.cs"
 "Assets/Scripts/SpawnManager.cs"
 -langversion:9.0
